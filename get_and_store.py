@@ -1,8 +1,23 @@
 from bs4 import BeautifulSoup
 import requests
+from peewee import *
 
 
-class GetAndStore:
+db = SqliteDatabase('storage.db', autoconnect=True)
+
+
+class Quotes(Model):
+    quote = CharField()
+    author = CharField()
+
+    class Meta:
+        database = db
+
+
+db.create_tables([Quotes])
+
+
+class GetAndStoreAndMore:
 
     def __init__(self):
         self.url = 'https://ru.citaty.net/tsitaty/sluchainaia-tsitata/'
@@ -15,7 +30,21 @@ class GetAndStore:
         a = quote.a['title'][17:].split('“ —')[1].strip('\\xa0').strip('„')
         return q, a
 
+    def add_quote(self, quote_):
+        query = Quotes(quote=quote_[0], author=quote_[1])
+        query.save()
 
-obj = GetAndStore()
+    def list_quotes(self):
+        all = []
+        for i in Quotes.select():
+            quo = (i.id, i.quote, i.author)
+            all.append(quo)
+        return all
 
-print(obj.get()[1])
+    def clear_all(self):
+        for i in Quotes.select():
+            query = i.delete()
+            query.execute()
+
+
+obj = GetAndStoreAndMore()
