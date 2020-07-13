@@ -1,7 +1,9 @@
+# -*- coding: utf-8 -*-
+
 from bs4 import BeautifulSoup
 import requests
 from peewee import *
-
+from unidecode import unidecode
 
 db = SqliteDatabase('storage.db', autoconnect=True)
 
@@ -19,15 +21,17 @@ db.create_tables([Quotes])
 
 class GetAndStoreAndMore:
 
-    def __init__(self):
-        self.url = 'https://ru.citaty.net/tsitaty/sluchainaia-tsitata/'
-        self.page = requests.get(self.url)
+    # def __init__(self):
+    #     self.
+    #     self.
 
     def get(self):
-        soup = BeautifulSoup(self.page.content, 'html.parser')
+        url = 'https://ru.citaty.net/tsitaty/sluchainaia-tsitata/'
+        page = requests.get(url)
+        soup = BeautifulSoup(page.content, 'html.parser')
         quote = soup.find('h3', class_='blockquote-text')
-        q = quote.a['title'][17:].split('“ —')[0].strip('\\xa0').strip('„')
-        a = quote.a['title'][17:].split('“ —')[1].strip('\\xa0').strip('„')
+        q = quote.a['title'][17:].split('“ —')[0].replace('\\xa0', '').strip('„')
+        a = quote.a['title'][17:].split('“ —')[1].replace('\\xa0', '').strip('„')
         return q, a
 
     def add_quote(self, quote_):
