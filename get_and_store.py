@@ -25,11 +25,8 @@ db.create_tables([Quotes])
 
 class GetAndStoreAndMore:
 
-    # def __init__(self):
-    #     self.
-    #     self.
-
-    def get(self):
+    @staticmethod
+    def get():
         url = 'https://ru.citaty.net/tsitaty/sluchainaia-tsitata/'
         page = requests.get(url)
         soup = BeautifulSoup(page.content, 'html.parser')
@@ -38,7 +35,8 @@ class GetAndStoreAndMore:
         a = quote.a['title'][17:].split('“ —')[1].strip('„')
         return q, a
 
-    def add_quote(self, quote_):
+    @staticmethod
+    def add_quote(quote_):
         try:
             query = Quotes(quote=quote_[0], author=quote_[1])
             query.save()
@@ -46,14 +44,16 @@ class GetAndStoreAndMore:
             print(e)
             pass
 
-    def list_quotes(self):
+    @staticmethod
+    def list_quotes():
         all = []
         for i in Quotes.select():
             quo = (i.id, i.quote, i.author)
             all.append(quo)
         return all
 
-    def clear_all(self):
+    @staticmethod
+    def clear_all():
         for i in Quotes.select():
             query = i.delete()
             query.execute()
@@ -69,13 +69,24 @@ class GetAndStoreAndMore:
             self.add_quote(self.get())
             sleep(1)
 
+    def add_ten(self):
+        for i in range(10):
+            self.add_quote(self.get())
+            sleep(0.5)
 
-    def add_particular(self, q, a):
+    def add_hundred(self):
+        for i in range(100):
+            self.add_quote(self.get())
+            sleep(0.5)
+
+    @staticmethod
+    def add_particular(q, a):
         try:
             query = Quotes(quote=q, author=a)
             query.save()
         except Exception as e:
             print(e)
             pass
+
 
 obj = GetAndStoreAndMore()
