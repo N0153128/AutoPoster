@@ -57,7 +57,7 @@ async def putout(q):
                 quote.add_hundred()
                 await bot.send_message(item, 'Successfully added 100 new quotes')
             elif bot.get_message(item) == '/begin_push':
-                # TODO: begin_push method - parse 1 quote, post random and remove it, wait 17280 seconds and repeat
+                await quote.begin_push(item)
                 pass
             elif not bot.get_message(item):
                 pass
