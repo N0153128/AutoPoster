@@ -51,18 +51,23 @@ async def putout(q):
             elif bot.get_message(item) == '/get_amount':
                 await bot.send_message(item, message=f'Total amount of quotes: {len(quote.list_quotes())}')
             elif bot.get_message(item) == '/add_ten':
+                await bot.send_message(item, 'Launching parser...')
                 quote.add_ten()
                 await bot.send_message(item, 'Successfully added 10 new quotes')
             elif bot.get_message(item) == '/add_hundred':
+                await bot.send_message(item, 'Launching parser...')
                 quote.add_hundred()
                 await bot.send_message(item, 'Successfully added 100 new quotes')
             elif bot.get_message(item) == '/add_thousand':
+                await bot.send_message(item, 'Launching parser...')
                 quote.add_thosand()
                 await bot.send_message(item, 'Successfully added 1000 new quotes')
             elif bot.get_message(item) == '/add_10000':
+                await bot.send_message(item, 'Launching parser...')
                 quote.add_ten_thousand()
                 await bot.send_message(item, 'Successfully added 10000 new quotes')
             elif bot.get_message(item) == '/add_100000':
+                await bot.send_message(item, 'Launching parser...')
                 quote.add_100000()
                 await bot.send_message(item, 'Successfully added 100000 new quotes')
             elif bot.get_message(item) == '/begin_push':
