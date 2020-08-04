@@ -56,6 +56,15 @@ async def putout(q):
             elif bot.get_message(item) == '/add_hundred':
                 quote.add_hundred()
                 await bot.send_message(item, 'Successfully added 100 new quotes')
+            elif bot.get_message(item) == '/add_thousand':
+                quote.add_thosand()
+                await bot.send_message(item, 'Successfully added 1000 new quotes')
+            elif bot.get_message(item) == '/add_10000':
+                quote.add_ten_thousand()
+                await bot.send_message(item, 'Successfully added 10000 new quotes')
+            elif bot.get_message(item) == '/add_100000':
+                quote.add_100000()
+                await bot.send_message(item, 'Successfully added 100000 new quotes')
             elif bot.get_message(item) == '/begin_push':
                 await quote.begin_push(item)
                 pass

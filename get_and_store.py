@@ -47,11 +47,11 @@ class GetAndStoreAndMore(Bot):
 
     @staticmethod
     def list_quotes():
-        all = []
+        all_ = []
         for i in Quotes.select():
             quo = (i.id, i.quote, i.author)
-            all.append(quo)
-        return all
+            all_.append(quo)
+        return all_
 
     @staticmethod
     def clear_all():
@@ -88,6 +88,21 @@ class GetAndStoreAndMore(Bot):
             self.add_quote(self.get())
             sleep(0.5)
 
+    def add_thosand(self):
+        for i in range(1000):
+            self.add_quote(self.get())
+            sleep(0.5)
+
+    def add_ten_thousand(self):
+        for i in range(10000):
+            self.add_quote(self.get())
+            sleep(0.5)
+
+    def add_100000(self):
+        for i in range(100000):
+            self.add_quote(self.get())
+            sleep(0.5)
+
     def get_first(self):
         bag = self.list_quotes()
         return bag[0]
@@ -118,7 +133,7 @@ class GetAndStoreAndMore(Bot):
             quote = self.get_first()
             await self.send_message(item, chat_id='@known_quotes', message=f'{quote[1]}\n \n ©{quote[2]}')
             self.remove_first()
-            sleep(17280)
+            sleep(8640)
 
 
 obj = GetAndStoreAndMore()
