@@ -12,6 +12,7 @@ quote = GetAndStoreAndMore()
 upd = bot.link + '/getUpdates'
 queue = asyncio.Queue()
 localtime = time.asctime(time.localtime(time.time()))
+launchtime = time.time()
 
 # printing startup message
 print(f'Started @ {localtime}')
@@ -73,6 +74,8 @@ async def putout(q):
             elif bot.get_message(item) == '/begin_push':
                 await quote.begin_push(item)
                 pass
+            elif bot.get_message(item) == '/uptime':
+                await bot.get_uptime(launchtime)
             elif not bot.get_message(item):
                 pass
 

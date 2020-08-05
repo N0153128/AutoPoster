@@ -1,5 +1,6 @@
 import ujson
 import aiohttp
+import time
 
 
 # this class gets updates from telegram api and sorts the data. most of the methods are self-explanatory. most of them
@@ -286,3 +287,15 @@ class Bot:
         data1 = [data]
         if 'callback_query' in data1[0]['result'][0]:
             return data1[0]['result'][0]['callback_query']['data']
+
+    async def direct_message(self, chat_id, message):
+        address = f'{self.link}/sendMessage'
+        await self.session.post(address,
+                                data=self.make_payload(ide=chat_id, text=message))
+
+    async def get_uptime(self, start):
+        past = start
+        vremechko = time.gmtime(time.time() - past)
+        await self.direct_message(chat_id='237892260', message=f'Uptime: {vremechko[1]} Months,'
+                                                               f' {vremechko[2]} days, {vremechko[3]} hours, '
+                                                               f'{vremechko[4]} minutes, {vremechko[5]} seconds')
