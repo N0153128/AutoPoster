@@ -1,7 +1,7 @@
 import ujson
 import aiohttp
 import time
-
+import param
 
 # this class gets updates from telegram api and sorts the data. most of the methods are self-explanatory. most of them
 # needs an object of get_all() (mostly called 'data') in order to return the value
@@ -10,7 +10,7 @@ import time
 class Bot:
 
     def __init__(self):
-        self.token = 'TOKEN'
+        self.token = param.TOKEN
         self.link = f'https://api.telegram.org/bot{self.token}'
         self.session = aiohttp.ClientSession()
         self.channel = '1001416421985'

@@ -74,6 +74,9 @@ async def putout(q):
             elif bot.get_message(item) == '/begin_push':
                 await quote.begin_push(item)
                 pass
+            elif bot.get_message(item)[:5] == '/addp':
+                quote.add_lots(int(bot.get_message(item)[5:]))
+                await bot.send_message(item, f'successfully added {bot.get_message(item)[5:]} of quotes')
             elif bot.get_message(item) == '/uptime':
                 await bot.get_uptime(launchtime)
             elif not bot.get_message(item):

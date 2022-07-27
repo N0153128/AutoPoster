@@ -76,7 +76,7 @@ class GetAndStoreAndMore(Bot):
     def add_lots(self, lots):
         for i in range(lots):
             self.add_quote(self.get())
-            sleep(1)
+            sleep(0.5)
 
     def add_ten(self):
         for i in range(10):
@@ -134,6 +134,12 @@ class GetAndStoreAndMore(Bot):
             await self.send_message(item, chat_id='@known_quotes', message=f'{quote[1]}\n \n ©{quote[2]}')
             self.remove_first()
             sleep(8640)
+
+    async def parsemax(self, item):
+        number = Bot.get_message(data=item)[5:]
+        for i in range(number):
+            self.add_quote(self.get())
+            sleep(0.3)
 
 
 obj = GetAndStoreAndMore()
